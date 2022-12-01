@@ -14,7 +14,7 @@ class WeatherController extends Controller
 
     public function search(WeatherService $weatherService)
     {
-        $weatherData = $weatherService->getWeatherByCity('Chojnów');
+        $weatherData = $weatherService->getWeatherByCity($_GET['city']);
         dd($weatherData);
     }
 }

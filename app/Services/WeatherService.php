@@ -9,7 +9,7 @@ class WeatherService
     {
         $response =  Http::get('https://wttr.in/' . $city .  '?format=j1');
 
-        return $response->json();
+        return $response->json('current_condition');
 
     }
 }
