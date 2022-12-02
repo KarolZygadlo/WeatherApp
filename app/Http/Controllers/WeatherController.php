@@ -17,7 +17,6 @@ class WeatherController extends Controller
     {
         $data = $weatherService->getWeatherByCity($_GET['city']);
 
-
-        dd($data);
+        return view('cityReport', compact(['data']));
     }
 }

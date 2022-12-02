@@ -12,34 +12,42 @@
 
     <div class="flex-grow">
 
+        <div class="pt-0 pb-5 md:pt-10 md:pb-5 mx-4">
+            <form action="{{ route('search') }}" method="GET">
+                <div class="bg-white flex items-center rounded-lg shadow-md md:shadow-xl">
+                    <input autofocus type="search" name="city"
+                           class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
+                           id="search" type="text" placeholder="Search ...">
+                    <div class="p-2 md:p-4">
+                        <button
+                            class="rounded-full focus:outline-none w-10 h-12 md:w-10 md:h-12 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <div class="flex items-center justify-center h-full">
 
             <div class="bg-white shadow-2xl p-6 rounded-2xl border-2 border-gray-50">
                 <div class="flex flex-col">
                     <div>
-                        <h2 class="font-bold text-gray-600 text-center">Bucharest, Romania</h2>
+                        <h2 class="font-bold text-gray-600 text-center">{{  $_GET['city']  }}</h2>
                     </div>
                     <div class="my-6">
-                        <div class="flex flex-row space-x-4 items-center">
-                            <div id="icon">
-                                <span>
-                                    <svg class="w-20 h-20 fill-stroke text-yellow-400" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
+                        <div class="flex flex-row space-x-4 items-center text-center">
                             <div id="temp">
-                                <h4 class="text-4xl">12&deg;C</h4>
-                                <p class="text-xs text-gray-500">Feels like +14&deg;C</p>
+                                <h4 class="text-4xl">{{ $data->temperature }}&deg;C</h4>
+                                <p class="text-base text-gray-500">Feels like {{ $data->feelsLike }}&deg;C</p>
+                                <p class="text-base text-gray-500">Wind speed {{ $data->windspeed }}km/h</p>
+                                <p class="text-base text-gray-500">Pressure {{ $data->pressure }}&#13169</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="w-full place-items-end text-right border-t-2 border-gray-100 mt-2">
-                        <a href="#" class="text-indigo-600 text-xs font-medium">View more</a>
                     </div>
                 </div>
             </div>
