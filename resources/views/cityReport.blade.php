@@ -57,7 +57,7 @@
 
     <div class="flex items-center justify-center h-full pt-0 pb-5 md:pt-10 md:pb-5">
 
-        @if(!in_array($city, $user_bookmarks))
+        @if($user_bookmarks && !in_array($city, $user_bookmarks))
 
             <form action="{{ route('add-to-bookmark') }}" method="POST">
                 @csrf
