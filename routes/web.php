@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WeatherController::class, "index"])->name('home');
+Route::get('/search', [WeatherController::class, "search"])->name('search');
+Route::post('/add-to-bookmark', [WeatherController::class, "addBookmark"])->name('add-to-bookmark');
+Route::post('/remove-from-bookmark', [WeatherController::class, "removeBookmark"])->name('remove-from-bookmark');
