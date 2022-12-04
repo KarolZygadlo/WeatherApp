@@ -38,7 +38,7 @@
         <div class="bg-white shadow-2xl p-6 rounded-2xl border-2 border-gray-50">
             <div class="flex flex-col">
                 <div>
-                    <h2 class="font-bold text-gray-600 text-center text-4xl">{{  $_GET['city']  }}</h2>
+                    <h2 class="font-bold text-gray-600 text-center text-4xl">{{ $city }}</h2>
                 </div>
                 <div class="my-6">
                     <div class="flex flex-row space-x-4 items-center text-center">
@@ -57,11 +57,11 @@
 
     <div class="flex items-center justify-center h-full pt-0 pb-5 md:pt-10 md:pb-5">
 
-        @if(!in_array($_GET['city'], $user_bookmarks))
+        @if(!in_array($city, $user_bookmarks))
 
             <form action="{{ route('add-to-bookmark') }}" method="POST">
                 @csrf
-                <input name="city" type="hidden" value="{{  $_GET['city']  }}">
+                <input name="city" type="hidden" value="{{  $city  }}">
                 <button class="group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow"
                         title="Add to bookmark and return to home page">
                     <div
@@ -75,7 +75,7 @@
 
             <form action="{{ route('remove-from-bookmark') }}" method="POST">
                 @csrf
-                <input name="city" type="hidden" value="{{  $_GET['city']  }}">
+                <input name="city" type="hidden" value="{{  $city  }}">
                 <button class="group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow"
                         title="Add to bookmark and return to home page">
                     <div

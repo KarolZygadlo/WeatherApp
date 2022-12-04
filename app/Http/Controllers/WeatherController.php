@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WeatherRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 
@@ -19,22 +19,23 @@ class WeatherController extends Controller
         return view('home', compact(['user_bookmarks']));
     }
 
-    public function search(WeatherService $weatherService): View
+    public function search(WeatherRequest $request, WeatherService $weatherService): View
     {
-        $data = $weatherService->getWeatherByCity($_GET['city']);
+        $data = $weatherService->getWeatherByCity($request->get('city'));
+        $city = $request->get('city');
         $user_bookmarks = json_decode(Cookie::get('bookmarks'));
 
-        return view('cityReport', compact(['data', 'user_bookmarks']));
+        return view('cityReport', compact(['data', 'city', 'user_bookmarks']));
     }
 
-    public function addBookmark(Request $request, CookieService $cookieService): RedirectResponse
+    public function addBookmark(WeatherRequest $request, CookieService $cookieService): RedirectResponse
     {
         $cookieService->setCookie($request);
 
         return back()->withInput();
     }
 
-    public function removeBookmark(Request $request, CookieService $cookieService): RedirectResponse
+    public function removeBookmark(WeatherRequest $request, CookieService $cookieService): RedirectResponse
     {
         $cookieService->removeFromCookie($request);
 

@@ -35,11 +35,15 @@
 
     @if($user_bookmarks)
 
+
+
         <h1 class="text-6xl lg:text-7xl xl:text-4xl text-black-200 font-bold mt-12 text-center">Bookmarked cities for quick access</h1>
+
+        <div class="flex flex-row">
 
         @foreach($user_bookmarks as $bookmark)
 
-            <div class="flex items-center justify-center h-full pt-0 pb-5 md:pt-10 md:pb-5">
+            <div class="flex items-center justify-center h-full pt-0 pb-5 md:pt-10 md:pb-5 mr-5">
 
                 <div class="bg-white shadow-2xl p-6 rounded-2xl border-2 border-gray-50">
                     <div class="flex flex-col">
@@ -62,6 +66,8 @@
             </div>
 
         @endforeach
+
+        </div>
 
     @endif
 
