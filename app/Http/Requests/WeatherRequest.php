@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,7 +26,7 @@ class WeatherRequest extends FormRequest
     public function rules()
     {
         return [
-            'city' => 'required'
+            "city" => "required",
         ];
     }
 
@@ -36,7 +38,7 @@ class WeatherRequest extends FormRequest
     public function messages()
     {
         return [
-            'city.required' => 'The city name is required.',
+            "city.required" => "The city name is required.",
         ];
     }
 }
