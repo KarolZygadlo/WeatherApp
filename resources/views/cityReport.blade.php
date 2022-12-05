@@ -14,11 +14,22 @@
         Application</h1>
 
     <div class="pt-0 pb-5 md:pt-10 md:pb-5 mx-4">
+
+        @if ($errors->any())
+            <div class="text-red-500 mb-2">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('search') }}" method="GET">
             <div class="bg-white flex items-center rounded-lg shadow-md md:shadow-xl">
                 <input autofocus type="search" name="city"
                        class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
-                       id="search" type="text" placeholder="Search ..." required>
+                       id="search" type="text" placeholder="What city do you want to check ?" required>
                 <div class="p-2 md:p-4">
                     <button
                         class="rounded-full focus:outline-none w-10 h-12 md:w-10 md:h-12 flex items-center justify-center">
@@ -38,7 +49,7 @@
         <div class="bg-white shadow-2xl p-6 rounded-2xl border-2 border-gray-50">
             <div class="flex flex-col">
                 <div>
-                    <h2 class="font-bold text-gray-600 text-center text-4xl">{{  $_GET['city']  }}</h2>
+                    <h2 class="font-bold text-gray-600 text-center text-4xl">{{ $city }}</h2>
                 </div>
                 <div class="my-6">
                     <div class="flex flex-row space-x-4 items-center text-center">
@@ -57,30 +68,30 @@
 
     <div class="flex items-center justify-center h-full pt-0 pb-5 md:pt-10 md:pb-5">
 
-        @if(!in_array($_GET['city'], $user_bookmarks))
+        @if($user_bookmarks ?? null && in_array($city, $user_bookmarks))
 
-            <form action="{{ route('add-to-bookmark') }}" method="POST">
+            <form action="{{ route('remove-from-bookmark') }}" method="POST">
                 @csrf
-                <input name="city" type="hidden" value="{{  $_GET['city']  }}">
+                <input name="city" type="hidden" value="{{  $city  }}">
                 <button class="group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow"
-                        title="Add to bookmark and return to home page">
+                        title="Remove from bookmark">
                     <div
                         class="absolute inset-0 w-3 bg-gray-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-                    <span class="relative text-black group-hover:text-white">Bookmark</span>
+                    <span class="relative text-black group-hover:text-white">Remove from bookmark</span>
                 </button>
 
             </form>
 
         @else
 
-            <form action="{{ route('remove-from-bookmark') }}" method="POST">
+            <form action="{{ route('add-to-bookmark') }}" method="POST">
                 @csrf
-                <input name="city" type="hidden" value="{{  $_GET['city']  }}">
+                <input name="city" type="hidden" value="{{  $city  }}">
                 <button class="group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow"
                         title="Add to bookmark and return to home page">
                     <div
                         class="absolute inset-0 w-3 bg-gray-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-                    <span class="relative text-black group-hover:text-white">Remove from bookmark</span>
+                    <span class="relative text-black group-hover:text-white">Bookmark</span>
                 </button>
 
             </form>

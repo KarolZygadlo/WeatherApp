@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Client\RequestException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,8 +44,17 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+
+        $this->renderable(function (RequestException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => 'We have problems with external API, check again later.'
+                ], $e->getCode());
+            }
+
+            return response()->view('errors.errorReport', [
+                'message' => 'We have problems with external API, check again later.'
+            ], $e->getCode());
         });
     }
 }
