@@ -14,11 +14,22 @@
         Application</h1>
 
     <div class="pt-0 pb-5 md:pt-10 md:pb-5 mx-4">
+
+        @if ($errors->any())
+            <div class="text-red-500 mb-2">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('search') }}" method="GET">
             <div class="bg-white flex items-center rounded-lg shadow-md md:shadow-xl">
                 <input autofocus type="search" name="city"
                        class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
-                       id="search" type="text" placeholder="Search ..." required>
+                       id="search" type="text" placeholder="What city do you want to check ?" required>
                 <div class="p-2 md:p-4">
                     <button
                         class="rounded-full focus:outline-none w-10 h-12 md:w-10 md:h-12 flex items-center justify-center">
