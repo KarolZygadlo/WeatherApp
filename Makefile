@@ -9,13 +9,13 @@ run:
 	docker-compose up -d
 
 php:
-	docker-compose exec ${PHP_FPM_SERVICE_NAME} ash
+	docker-compose exec ${PHP_FPM_SERVICE_NAME} sh
 
 test:
 	docker-compose exec ${PHP_FPM_SERVICE_NAME} composer test
 
 node:
-	docker-compose exec ${NODE_SERVICE_NAME} ash
+	docker-compose exec ${NODE_SERVICE_NAME} sh
 
 fix:
 	docker-compose exec ${PHP_FPM_SERVICE_NAME} composer csf
