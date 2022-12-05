@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Client\RequestException;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -32,28 +33,25 @@ class Handler extends ExceptionHandler
      * @var array<int, string>
      */
     protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
+        "current_password",
+        "password",
+        "password_confirmation",
     ];
 
     /**
      * Register the exception handling callbacks for the application.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-
         $this->renderable(function (RequestException $e, $request) {
-            if ($request->is('api/*')) {
+            if ($request->is("api/*")) {
                 return response()->json([
-                    'message' => 'We have problems with external API, check again later.'
+                    "message" => "We have problems with external API, check again later.",
                 ], $e->getCode());
             }
 
-            return response()->view('errors.errorReport', [
-                'message' => 'We have problems with external API, check again later.'
+            return response()->view("errors.errorReport", [
+                "message" => "We have problems with external API, check again later.",
             ], $e->getCode());
         });
     }

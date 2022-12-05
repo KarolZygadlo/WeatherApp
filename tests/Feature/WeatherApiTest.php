@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\DataTransferObjects\WeatherData;
@@ -15,50 +17,47 @@ class WeatherApiTest extends TestCase
             ->shouldReceive("getWeatherByCity")
             ->once()
             ->andReturn(
-                new WeatherData("-5", '4', '1021', '26'),
+                new WeatherData("-5", "4", "1021", "26"),
             );
     }
 
     /**
      * A basic feature test example.
-     *
-     * @return void
      */
-    public function testSetUpMockToCheckIfEndpointReturnCorrectData()
+    public function testSetUpMockToCheckIfEndpointReturnCorrectData(): void
     {
         $this->mockWeatherServiceData();
 
-        $this->json('get', 'api/get-weather?city=Wrocław')
-            ->assertJson(fn(AssertableJson $json) => $json->where('feelsLike', '-5')
-                ->where('temperature', '4')
-                ->where('pressure', '1021')
-                ->where('windspeed', '26')
-                ->etc());
+        $this->json("get", "api/get-weather?city=Wrocław")
+            ->assertJson(fn(AssertableJson $json) => $json->where("feelsLike", "-5")
+                ->where("temperature", "4")
+                ->where("pressure", "1021")
+                ->where("windspeed", "26")
+                ->etc(), );
     }
 
-    public function testWeatherJsonStructure()
+    public function testWeatherJsonStructure(): void
     {
         $this->mockWeatherServiceData();
 
-        $this->json('get', 'api/get-weather?city=Wrocław')
+        $this->json("get", "api/get-weather?city=Wrocław")
             ->assertJsonStructure([
-                'feelsLike',
-                'temperature',
-                'pressure',
-                'windspeed'
+                "feelsLike",
+                "temperature",
+                "pressure",
+                "windspeed",
             ]);
     }
 
-    public function testRequiredCity()
+    public function testRequiredCity(): void
     {
-        $this->json('get', 'api/get-weather?city=')
+        $this->json("get", "api/get-weather?city=")
             ->assertStatus(422)
             ->assertJson([
                 "message" => "The city name is required.",
                 "errors" => [
-                    "city" => ["The city name is required."]
-                ]
+                    "city" => ["The city name is required."],
+                ],
             ]);
     }
-
 }

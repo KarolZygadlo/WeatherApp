@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\WeatherService;
+use Illuminate\Console\Command;
 
 class GetWeather extends Command
 {
@@ -12,14 +14,14 @@ class GetWeather extends Command
      *
      * @var string
      */
-    protected $signature = 'get:weather';
+    protected $signature = "get:weather";
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Checking the weather for the selected city.';
+    protected $description = "Checking the weather for the selected city.";
 
     /**
      * Execute the console command.
@@ -28,17 +30,16 @@ class GetWeather extends Command
      */
     public function handle(WeatherService $weatherService)
     {
-        $city = $this->ask('For which city do you want to check the weather ?');
+        $city = $this->ask("For which city do you want to check the weather ?");
 
         $data = $weatherService->getWeatherByCity($city);
 
         $this->info(
-            'The weather for the: ' . $city .  "\n" .
-            'Temperature is : ' . $data->temperature . '°C' . "\n" .
-            'Feeling Temperature is : ' . $data->feelsLike . '°C' . "\n" .
-            'The Pressure is : ' . $data->pressure . 'hPa' . "\n" .
-            'The WindSpeed is : ' . $data->windspeed . 'km/h'
+            "The weather for the: " . $city . "\n" .
+            "Temperature is : " . $data->temperature . "°C" . "\n" .
+            "Feeling Temperature is : " . $data->feelsLike . "°C" . "\n" .
+            "The Pressure is : " . $data->pressure . "hPa" . "\n" .
+            "The WindSpeed is : " . $data->windspeed . "km/h",
         );
-
     }
 }
