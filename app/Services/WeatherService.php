@@ -9,7 +9,7 @@ class WeatherService
 {
     public function getWeatherByCity(string $city): Object
     {
-        $response = Http::get('https://wttr.in/' . $city . '?format=j1');
+        $response = Http::get('https://wttr.in/' . $city . '?format=j1')->throw();
         return WeatherData::fromArray($response->json('current_condition'));
     }
 }

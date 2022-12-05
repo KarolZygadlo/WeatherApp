@@ -4,10 +4,6 @@ namespace Tests\Feature;
 
 use App\DataTransferObjects\WeatherData;
 use App\Services\WeatherService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class WeatherApiTest extends TestCase
@@ -17,7 +13,7 @@ class WeatherApiTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function testSetUpMockRepository()
     {
         $this->mock(WeatherService::class)
             ->shouldReceive("getWeatherByCity")
@@ -25,5 +21,7 @@ class WeatherApiTest extends TestCase
             ->andReturn(
                 new WeatherData("-5", '4', '1021', '26'),
             );
+
+        $response = $this->get('/api/get-weather?city=Wrocław');
     }
 }
