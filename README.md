@@ -63,7 +63,7 @@ make php
 * example andpoint for outside services
 
 ```
-api/get-weather?city=Legnica
+/api/get-weather?city=Legnica
 ```
 ### Running tests
 
