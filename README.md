@@ -81,6 +81,12 @@ You can run PHP-CS-Fixer:
 make fix
 ```
 
+### Stopping docker containers
+
+```
+make stop
+```
+
 ### Available containers
 
 * web - nginx HTTP server
