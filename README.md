@@ -54,6 +54,17 @@ make node
 ```
 localhost:80
 ```
+* check the weather with your terminal:
+
+```
+make php
+    php artisan get:weather
+```
+* example andpoint for outside services
+
+```
+api/get-weather?city=Legnica
+```
 ### Running tests
 
 You can run PHPUnit test cases
@@ -69,12 +80,6 @@ You can run PHP-CS-Fixer:
 ```
 make fix
 ```
-
-### xDebug
-
-To use xDebug you need to set `DOCKER_INSTALL_XDEBUG` flag to `true` in your local `.env` file. Then you need to rebuild
-PHP container: `docker-compose up --build -d php`. You can also set
-up [xDebug parameters](https://xdebug.org/docs/all_settings) in `docker/dev/php/php.ini` file.
 
 ### Available containers
 
