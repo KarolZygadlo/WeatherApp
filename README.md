@@ -21,8 +21,6 @@ Then just follow the steps below:
 cp .env.example .env
 ```
 
-* open `phpunit.xml` and change 'APP_KEY'
-
 * build and run containers:
 
 ```
