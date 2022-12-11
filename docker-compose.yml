@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
     web:
-        image: nginx
+        image: nginx:1.23.2-alpine
         container_name: weather-web
         working_dir: /application
         volumes:
@@ -32,7 +32,7 @@ services:
         restart: unless-stopped
 
     node:
-        image: node
+        image: node:19-alpine3.15
         container_name: weather-node
         working_dir: /application
         tty: true

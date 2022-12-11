@@ -45,6 +45,5 @@ class GetWeather extends Command
         } catch (Throwable $e) {
             $this->info("We have problems with external API, check again later.");
         }
-
     }
 }
