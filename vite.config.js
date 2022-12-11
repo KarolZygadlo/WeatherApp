@@ -1,14 +1,13 @@
 
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
-import { networkInterfaces } from 'os'
 
 export default ({ mode }) => {
-    process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+
     return defineConfig({
         server: {
-            host: Object.values(networkInterfaces()).flat().find(i => i.family === 'IPv4' && !i.internal).address,
-            port: process.env.EXTERNAL_NODE_PORT,
+            host: true,
+            port: 5173
         },
         resolve: {
             alias: {
