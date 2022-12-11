@@ -6,14 +6,6 @@ FROM php:${PHP_VERSION}
 
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
-ARG XDEBUG_VERSION=3.1.6
-ARG INSTALL_XDEBUG=false
-
-RUN if [ ${INSTALL_XDEBUG} = true ]; then \
-    pecl install xdebug-${XDEBUG_VERSION} \
-    && docker-php-ext-enable xdebug \
-;fi
-
 RUN apt-get update && apt-get install --assume-yes \
     libpcre3-dev \
     gnupg \
