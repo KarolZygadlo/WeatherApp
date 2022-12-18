@@ -32,7 +32,7 @@
 
     <div class="flex items-center justify-center h-full pt-0 pb-5 md:pt-10 md:pb-5">
 
-        @if($user_bookmarks ?? null && in_array($city, $user_bookmarks))
+        @if(in_array($city, $user_bookmarks))
 
             <form action="{{ route('remove-from-bookmark') }}" method="POST">
                 @csrf
