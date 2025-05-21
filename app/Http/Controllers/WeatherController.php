@@ -16,7 +16,7 @@ class WeatherController extends Controller
 {
     public function index(): View
     {
-        $user_bookmarks = json_decode(Cookie::get("bookmarks") ?: "");
+        $user_bookmarks = json_decode(Cookie::get("bookmarks") ?: "[]");
         return view("home", compact(["user_bookmarks"]));
     }
 
@@ -24,7 +24,7 @@ class WeatherController extends Controller
     {
         $city = $request->get("city");
         $data = $weatherService->getWeatherByCity($city);
-        $user_bookmarks = json_decode(Cookie::get("bookmarks") ?: "");
+        $user_bookmarks = json_decode(Cookie::get("bookmarks") ?: "[]");
 
         return view("cityReport", compact(["data", "city", "user_bookmarks"]));
     }
